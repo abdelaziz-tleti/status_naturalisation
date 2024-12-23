@@ -15,6 +15,6 @@
 ![image](https://github.com/user-attachments/assets/6f13ef5b-e365-449d-94f1-d541449855c5)
 
 
-Et voilà, ton extension est installé et utilisable sur ton Chrome 🎉
+Et voilà, l'extension est installé et utilisable sur ton Chrome 🎉
 
 <img width="1279" alt="image" src="https://github.com/user-attachments/assets/63577ee2-9ec0-40ea-910c-18b0eb761f4e" />
