@@ -9,7 +9,7 @@
 ![image](https://github.com/user-attachments/assets/1c26f75b-963f-473b-a898-0c44e82eba9e)
 
 
-5. En haut à gauche, clique sur "Charger l'extension non empaquetée" puis sélectionne ton dossier d'extension
+4. En haut à gauche, clique sur "Charger l'extension non empaquetée" puis sélectionne ton dossier d'extension
 
 
 ![image](https://github.com/user-attachments/assets/6f13ef5b-e365-449d-94f1-d541449855c5)
