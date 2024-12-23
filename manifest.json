@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Dossier Statut Injector",
+  "version": "1.0",
+  "description": "Fetch and display dossier.statut after the active step.",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["https://administration-etrangers-en-france.interieur.gouv.fr/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://administration-etrangers-en-france.interieur.gouv.fr/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
