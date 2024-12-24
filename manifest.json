@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Dossier Statut Injector",
+  "name": "Naturalisation Statut Injector",
   "version": "1.0",
   "description": "Fetch and display dossier.statut after the active step.",
   "permissions": ["scripting", "activeTab"],
