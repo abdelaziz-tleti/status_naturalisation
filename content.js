@@ -31,11 +31,50 @@
    
    const data = await response.json();
    if (!data?.dossier?.statut) throw new Error("Statut non trouvé");
+
+
+function getStatusDescription(status) {
+     const statusMap = {
+       'dossier_depose': "Dossier déposé, attendez changement d'API",
+       'verification_formelle_a_traiter': "Préfecture a reçu, tri en cours",
+       'verification_formelle_en_cours': "Préfecture examine rapidement votre demande",
+       'verification_formelle_mise_en_demeure': "Préfecture : Possible demande de compléments pour dossier",
+       'css_mise_en_demeure_a_affecter': "Préfecture : Mise en demeure attribuée",
+       'css_mise_en_demeure_a_rediger': "Préfecture : Mise en demeure à rédiger",
+       'instruction_a_affecter': "Préfecture termine tri, attente d'agent",
+       'instruction_recepisse_completude_a_envoyer': "Préfecture : Lecture détaillée par agent commencée",
+       'instruction_recepisse_completude_a_envoyer_retour_complement_a_traiter': "Préfecture : Compléments ou entretien possibles avec agent",
+       'instruction_date_ea_a_fixer': "Préfecture : Demande complète, récépissé reçu, enquêtes lancées",
+       'ea_demande_report_ea': "Préfecture : Report possible, compléments encore possibles",
+       'ea_en_attente_ea': "Préfecture : Attente convocation entretien réglementaire",
+       'ea_crea_a_valider': "Préfecture : Entretien passé, compte-rendu à rédiger",
+       'prop_decision_pref_a_effectuer': "Préfecture doit statuer sur naturalisation",
+       'prop_decision_pref_en_attente_retour_hierarchique': "Préfecture : Décision préfectorale en discussion hiérarchique",
+       'prop_decision_pref_prop_a_editer': "Préfecture : Décision prise, rédaction en cours",
+       'prop_decision_pref_en_attente_retour_signataire': "Préfecture : Décision au préfet pour signature",
+       'controle_a_affecter': "SDANF : Dossier transmis, attente d'affectation",
+       'controle_a_effectuer': "SDANF : Ministère contrôle dossier, attend état civil",
+       'controle_en_attente_pec': "SCEC : Attente de pièce d'état civil",
+       'controle_pec_a_faire': "SCEC : Pièce d'état civil en cours",
+       'controle_transmise_pour_decret': "SDANF : Décret transmis pour approbation",
+       'controle_en_attente_retour_hierarchique': "SDANF : Attente retour hiérarchique pour décret",
+       'controle_decision_a_editer': "SDANF : Décision hiérarchique prise, édition prochaine",
+       'controle_en_attente_signature': "SDANF : Décision prise, attente signature",
+       'transmis_a_ac': "DécretDossier transmis au service décret",
+       'a_verifier_avant_insertion_decret': "Décret : Vérification avant insertion décret",
+       'prete_pour_insertion_decret': "Décret : Dossier prêt pour insertion décret",
+       'decret_publie': "Décret de naturalisation publié",
+       'decret_envoye_prefecture': "Décret envoyé à préfecture",
+       'notification_envoyee': "Décret : Notification envoyée au demandeur",
+       'demande_traitee': "Décret : Demande finalisée",
+       'code_non_reconnu': "Code non reconnu"
+     };
    
-   const dossierStatus = data.dossier.statut
-   .replace(/_/g, " ")
-   .toLowerCase()
-   .replace(/\b\w/, char => char.toUpperCase());
+     return statusMap[status] || statusMap['code_non_reconnu'];
+   }
+
+   const dossierStatus = getStatusDescription( data.dossier.statut.toLowerCase());
+ 
 
    function daysAgo(dateString) {
    const inputDate = new Date(dateString);
@@ -47,6 +86,8 @@
    return `Il y a ${diffInDays} jours`;
    }
    
+   
+      
    const activeStep = document.querySelector("li.stepsBox--item.active");
    if (!activeStep) throw new Error("Étape active non trouvée");
 
@@ -77,7 +118,7 @@
    `;
 
    activeStep.parentNode.insertBefore(newElement, activeStep.nextSibling);
-   console.log("Nouvel élément inséré avec le statut du dossier.");
+   console.log("Nouvel élément inséré avec le statut du dossier");
    
  } catch (error) {
    console.error("Erreur:", error.message);
