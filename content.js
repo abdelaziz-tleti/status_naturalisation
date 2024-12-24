@@ -127,7 +127,7 @@ function getStatusDescription(status) {
    newElement.setAttribute("_ngcontent-exv-c17", "");
    newElement.setAttribute("style", `
    background: linear-gradient(165deg, #dbe2e9, #ffffff);
-   border: 4px solid #255a99;
+   border: 2px solid #255a99;
    border-radius: 8px;
    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), 5px 5px 15px rgba(0, 0, 0, 0.3);
    display: flex;
