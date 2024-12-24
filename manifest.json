@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Naturalisation Statut Injector",
+  "name": "Naturalisation Statut",
   "version": "1.0",
-  "description": "Fetch and display dossier.statut after the active step.",
+  "description": "Afficher le statut caché de la naturalisation",
   "permissions": ["scripting", "activeTab"],
   "host_permissions": ["https://administration-etrangers-en-france.interieur.gouv.fr/*"],
   "content_scripts": [
