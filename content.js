@@ -106,17 +106,18 @@ function getStatusDescription(status) {
 
    const dossierStatus = getStatusDescription( data.dossier.statut.toLowerCase());
  
-
    function daysAgo(dateString) {
-   const inputDate = new Date(dateString);
-   const currentDate = new Date();
-   const diffInDays = Math.floor((currentDate - inputDate) / (1000 * 60 * 60 * 24));
-
-   if (diffInDays === 0) return "Aujourd'hui";
-   if (diffInDays === 1) return "Il y a 1 jour";
-   return `Il y a ${diffInDays} jours`;
+    const inputDate = new Date(dateString);
+    const currentDate = new Date();
+    const diffInDays = Math.floor((currentDate - inputDate) / (1000 * 60 * 60 * 24));
+    
+    if (diffInDays === 0) return "Aujourd'hui";
+    if (diffInDays === 1) return "Il y a 1 jour";
+    if (diffInDays <= 30) return `Il y a ${diffInDays} jours`;
+    
+    const months = (diffInDays / 30).toFixed(1);
+    return `Il y a ${months} mois`;
    }
-   
    
       
    const activeStep = document.querySelector("li.stepsBox--item.active");
