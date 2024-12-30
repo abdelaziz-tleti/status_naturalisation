@@ -41,11 +41,11 @@ function getStatusDescription(status) {
        // 2 Examen des pièces en cours
        
         'verification_formelle_a_traiter': "Préfecture a reçu, tri en cours",
-        'verification_formelle_en_cours': "Préfecture examine rapidement votre demande",
+        'verification_formelle_en_cours': "Préfecture examine votre demande",
         'verification_formelle_mise_en_demeure': "Préfecture : Possible demande de compléments pour dossier",
         'css_mise_en_demeure_a_affecter': "Préfecture : Mise en demeure attribuée",
         'css_mise_en_demeure_a_rediger': "Préfecture : Mise en demeure à rédiger",
-        'instruction_a_affecter': "Préfecture termine tri, attente d'agent",
+        'instruction_a_affecter': "Préfecture : En attente d'affectation à un agent",
        
        // 3 Réception du récépissé de complétude
        'instruction_recepisse_completude_a_envoyer': "Préfecture : Lecture détaillée par agent commencée",
