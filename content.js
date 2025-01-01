@@ -112,10 +112,19 @@ function getStatusDescription(status) {
     const diffInDays = Math.floor((currentDate - inputDate) / (1000 * 60 * 60 * 24));
     
     if (diffInDays === 0) return "Aujourd'hui";
-    if (diffInDays === 1) return "Il y a 1 jour";
-    if (diffInDays <= 30) return `Il y a ${diffInDays} jours`;
+    if (diffInDays === 1) return "Il y a 1 jr";
+    if (diffInDays <= 30) return `Il y a ${diffInDays} jrs`;
     
-    const months = (diffInDays / 30).toFixed(1);
+    const years = Math.floor(diffInDays / 365);
+    const months = Math.floor((diffInDays % 365) / 30);
+    
+    if (years >= 1) {
+      if (months === 0) {
+        return `Il y a ${years} ${years === 1 ? 'an' : 'ans'}`;
+      }
+      return `Il y a ${years} ${years === 1 ? 'an' : 'ans'} et ${months} mois`;
+    }
+    
     return `Il y a ${months} mois`;
    }
    
@@ -144,7 +153,7 @@ function getStatusDescription(status) {
      <span _ngcontent-exv-c17="" aria-hidden="true" class="fa fa-hourglass-start" style="color: #bf2626;"></span>
      </span>
      <p _ngcontent-exv-c17="">
-     ${dossierStatus} (${daysAgo(data?.dossier?.date_statut)})
+     ${dossierStatus} <span style="color: #bf2626;" >(${daysAgo(data?.dossier?.date_statut)})</span>
      </p>
    </div>
    `;
