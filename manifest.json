@@ -1,14 +1,27 @@
 {
   "manifest_version": 3,
-  "name": "Naturalisation Statut",
+  "name": "Statut API du Dossier Naturalisation",
   "version": "1.0",
-  "description": "Afficher le statut caché de la naturalisation",
-  "permissions": ["scripting", "activeTab"],
-  "host_permissions": ["https://administration-etrangers-en-france.interieur.gouv.fr/*"],
-  "content_scripts": [
-    {
-      "matches": ["https://administration-etrangers-en-france.interieur.gouv.fr/*"],
-      "js": ["content.js"]
-    }
-  ]
+  "description": "Statut API du Dossier Naturalisation",
+  "permissions": [
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://administration-etrangers-en-france.interieur.gouv.fr/*"
+  ],
+  "content_scripts": [{
+    "matches": ["https://administration-etrangers-en-france.interieur.gouv.fr/*"],
+    "js": ["inject.js"],
+    "run_at": "document_end"
+  }],
+  "web_accessible_resources": [{
+    "resources": ["content.js", "crypto-js.min.js"],
+    "matches": ["https://administration-etrangers-en-france.interieur.gouv.fr/*"]
+  }],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png", 
+    "128": "icons/icon128.png"
+  }
 }
