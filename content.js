@@ -58,8 +58,6 @@
     return xorEncryptDecrypt(encryptedString, i);
   }
 
-  // Call the decrypt function
-  //IamKamal_23071993("`6y`:r 'qb|w~;2g$#op{owfd&,` ift2~ee=|{|4'6q,}ia#");
   if (!window.location.href.includes(CONFIG.URL_PATTERN)) return;
 
   try {
