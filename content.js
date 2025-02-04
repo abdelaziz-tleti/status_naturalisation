@@ -188,6 +188,7 @@
 
       const years = Math.floor(diffInDays / 365);
       const months = Math.floor((diffInDays % 365) / 30);
+      const days = diffInDays % 30;
 
       if (years >= 1) {
         if (months === 0) {
@@ -196,6 +197,15 @@
         return `Il y a ${years} ${
           years === 1 ? "an" : "ans"
         } et ${months} mois`;
+      }
+
+      if (months >= 1) {
+        if (days === 0) {
+          return `Il y a ${months} ${months === 1 ? "mois" : "mois"}`;
+        }
+        return `Il y a ${months} ${
+          months === 1 ? "mois" : "mois"
+        } et ${days} jrs`;
       }
 
       return `Il y a ${months} mois`;
