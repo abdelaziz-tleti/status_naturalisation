@@ -4,22 +4,22 @@
     TAB_NAME: "Demande d'accès à la Nationalité Française",
     API_ENDPOINT:
       "https://administration-etrangers-en-france.interieur.gouv.fr/api/anf/dossier-stepper",
+    SECONDARY_API_ENDPOINT:
+      "https://administration-etrangers-en-france.interieur.gouv.fr/api/anf/usager/dossiers/statut",
     WAIT_TIME: 100,
   };
 
-  //dedicaced to Kamal weld 93
+  // Fonction de décryptage dédiée à Kamal
   function IamKamal_23071993(encryptedString) {
     const kfal =
       "U2FsdGVkX1+WsXvmnkAtjZT0iM2BfCGU9y76DrRufAVcmcIYgKDITp7wjJgXP2p+";
+    const secretKey = "Sg-164342";
 
-    function getSarout() {
-      return CryptoJS.AES.decrypt(kfal, "Sg-164342").toString(
-        CryptoJS.enc.Utf8
-      );
-    }
+    const getSarout = () =>
+      CryptoJS.AES.decrypt(kfal, secretKey).toString(CryptoJS.enc.Utf8);
 
-    function getCurrentDate() {
-      var i = new Intl.DateTimeFormat("fr-CA", {
+    const getCurrentDate = () =>
+      new Intl.DateTimeFormat("fr-CA", {
         timeZone: "Africa/Casablanca",
         year: "numeric",
         month: "2-digit",
@@ -27,35 +27,23 @@
         hour12: false,
       }).format(new Date());
 
-      return i;
-    }
+    const generateSHA256Sarout = (e) =>
+      CryptoJS.SHA256(e).toString(CryptoJS.enc.Hex);
 
-    function generateSHA256Sarout(e) {
-      return CryptoJS.SHA256(e).toString(CryptoJS.enc.Hex);
-    }
-
-    function generateSarout(t) {
-      var i = generateSHA256Sarout(getSarout()) + t;
-      return generateSHA256Sarout(i);
-    }
-
-    function xorEncryptDecrypt(t, r) {
-      var c = CryptoJS.enc.Utf8.parse(t);
-      var a = CryptoJS.enc.Utf8.parse(r);
-      var u = c.clone();
-      for (var s = 0; s < c.sigBytes; s++) {
-        u.words[s] ^= a.words[s % a.sigBytes];
+    const xorEncryptDecrypt = (text, key) => {
+      const textBytes = CryptoJS.enc.Utf8.parse(text);
+      const keyBytes = CryptoJS.enc.Utf8.parse(key);
+      const resultBytes = textBytes.clone();
+      for (let i = 0; i < textBytes.sigBytes; i++) {
+        resultBytes.words[i] ^= keyBytes.words[i % keyBytes.sigBytes];
       }
-      console.log(
-        "CryptoJS.enc.Utf8.stringify(u): " + CryptoJS.enc.Utf8.stringify(u)
-      );
+      return CryptoJS.enc.Utf8.stringify(resultBytes);
+    };
 
-      return CryptoJS.enc.Utf8.stringify(u);
-    }
-
-    var r = getCurrentDate();
-    var i = generateSarout(r);
-    return xorEncryptDecrypt(encryptedString, i);
+    const sarout = generateSHA256Sarout(
+      generateSHA256Sarout(getSarout()) + getCurrentDate()
+    );
+    return xorEncryptDecrypt(encryptedString, sarout);
   }
 
   if (!window.location.href.includes(CONFIG.URL_PATTERN)) return;
@@ -79,7 +67,7 @@
     const tabElement = await waitForElement();
     tabElement.click();
 
-    // Get dossier data directly
+    // Obtenir les données du dossier directement
     const response = await fetch(CONFIG.API_ENDPOINT);
     if (!response.ok) throw new Error(`Erreur API: ${response.status}`);
 
@@ -91,39 +79,37 @@
     };
 
     // Fonction pour obtenir la description du statut
-    function getStatusDescription(status) {
+    async function getStatusDescription(status) {
       const statusMap = {
         // 1 Dépôt de la demande
         dossier_depose: "Dossier déposé, attendez changement d'API",
         // 2 Examen des pièces en cours
-        verification_formelle_a_traiter: "Préfecture a reçu, tri en cours",
-        verification_formelle_en_cours:
-          "Préfecture examine rapidement votre demande",
+        verification_formelle_a_traiter:
+          "Préfecture : Vérification à planfiier",
+        verification_formelle_en_cours: "Préfecture examine votre demande",
         verification_formelle_mise_en_demeure:
           "Préfecture : Possible demande de compléments pour dossier",
         css_mise_en_demeure_a_affecter:
           "Préfecture : Mise en demeure attribuée",
         css_mise_en_demeure_a_rediger: "Préfecture : Mise en demeure à rédiger",
-        instruction_a_affecter: "Préfecture termine tri, attente d'agent",
+        instruction_a_affecter: "Préfecture : En attente affecation à un agent",
         // 3 Réception du récépissé de complétude
         instruction_recepisse_completude_a_envoyer:
-          "Préfecture : Lecture détaillée par agent commencée",
+          "Préfecture : récépissé de compléture à envoyer",
         instruction_recepisse_completude_a_envoyer_retour_complement_a_traiter:
-          "Préfecture : Compléments ou entretien possibles avec agent",
+          "Préfecture : Compléments à traiter par l'agent",
         // 4 Entretien
         instruction_date_ea_a_fixer:
           "Préfecture : Demande complète, récépissé reçu, enquêtes lancées",
-        ea_demande_report_ea:
-          "Préfecture : Report possible, compléments encore possibles",
+        ea_demande_report_ea: "Préfecture : Report demande de report entretien",
         ea_en_attente_ea:
           "Préfecture : Attente convocation entretien réglementaire",
         ea_crea_a_valider:
           "Préfecture : Entretien passé, compte-rendu à rédiger",
         // 5 Traitement en cours
-        prop_decision_pref_a_effectuer:
-          "Préfecture doit statuer sur naturalisation",
+        prop_decision_pref_a_effectuer: "Préfecture : Décision à effectuer",
         prop_decision_pref_en_attente_retour_hierarchique:
-          "Préfecture : Décision préfectorale en discussion hiérarchique",
+          "Préfecture : Décision en discussion hiérarchique",
         prop_decision_pref_prop_a_editer:
           "Préfecture : Décision prise, rédaction en cours",
         prop_decision_pref_en_attente_retour_signataire:
@@ -148,7 +134,6 @@
           "Décret : Vérification avant insertion décret",
         prete_pour_insertion_decret:
           "Décret : Dossier prêt pour insertion décret",
-        decret_publie: "Décret de naturalisation publié",
         decret_envoye_prefecture: "Décret envoyé à préfecture",
         notification_envoyee: "Décret : Notification envoyée au demandeur",
         demande_traitee: "Décret : Demande finalisée",
@@ -166,15 +151,26 @@
         css_notifie: "Décision : CSS notitie",
         demande_en_cours_rapo: "Décision : Demande en cours RAPO",
         controle_demande_notifiee: "Décision : Contrôle demande notifiée",
-        DECRET_PUBLIE: "Décision : Décret publié",
+        decret_publie: "Décret de naturalisation publié",
         // 9
         code_non_reconnu: "Code non reconnu",
       };
 
-      return statusMap[status] || statusMap["code_non_reconnu"];
+      if (statusMap[status]) {
+        return statusMap[status];
+      } else {
+        const secondaryResponse = await fetch(CONFIG.SECONDARY_API_ENDPOINT);
+        if (!secondaryResponse.ok)
+          throw new Error(`Erreur API secondaire: ${secondaryResponse.status}`);
+        const secondaryData = await secondaryResponse.json();
+        return (
+          statusMap[secondaryData?.dossier_state] ||
+          statusMap["code_non_reconnu"]
+        );
+      }
     }
 
-    const dossierStatus = getStatusDescription(
+    const dossierStatus = await getStatusDescription(
       IamKamal_23071993(data.dossier.statut).toLowerCase()
     );
 
