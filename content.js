@@ -64,6 +64,15 @@
       }
     }
 
+    // fonction pour attendre le chargement de l'étape active
+    async function waitForActiveStep() {
+      while (true) {
+        const activeStep = document.querySelector("li.itemFrise.active");
+        if (activeStep) return activeStep;
+        await new Promise((resolve) => setTimeout(resolve, CONFIG.WAIT_TIME));
+      }
+    }
+
     const tabElement = await waitForElement();
     tabElement.click();
 
@@ -170,8 +179,18 @@
       }
     }
 
+    let dossierStatusCode = IamKamal_23071993(data.dossier.statut);
+
     const dossierStatus = await getStatusDescription(
-      IamKamal_23071993(data.dossier.statut).toLowerCase()
+      dossierStatusCode.toLowerCase()
+    );
+
+    console.log(
+      "Extension API Naturalisation  : Statut code = " + dossierStatusCode
+    );
+
+    console.log(
+      "Extension API Naturalisation  : Statut description = " + dossierStatus
     );
 
     // Fonction pour calculer le nombre de jours écoulés
@@ -183,8 +202,8 @@
       );
 
       if (diffInDays === 0) return "Aujourd'hui";
-      if (diffInDays === 1) return "Il y a 1 jr";
-      if (diffInDays <= 30) return `Il y a ${diffInDays} jrs`;
+      if (diffInDays === 1) return "il y a 1 jr";
+      if (diffInDays <= 30) return `il y a ${diffInDays} jrs`;
 
       const years = Math.floor(diffInDays / 365);
       const months = Math.floor((diffInDays % 365) / 30);
@@ -192,27 +211,27 @@
 
       if (years >= 1) {
         if (months === 0) {
-          return `Il y a ${years} ${years === 1 ? "an" : "ans"}`;
+          return `il y a ${years} ${years === 1 ? "an" : "ans"}`;
         }
-        return `Il y a ${years} ${
+        return `il y a ${years} ${
           years === 1 ? "an" : "ans"
         } et ${months} mois`;
       }
 
       if (months >= 1) {
         if (days === 0) {
-          return `Il y a ${months} ${months === 1 ? "mois" : "mois"}`;
+          return `il y a ${months} ${months === 1 ? "mois" : "mois"}`;
         }
-        return `Il y a ${months} ${
+        return `il y a ${months} ${
           months === 1 ? "mois" : "mois"
         } et ${days} jrs`;
       }
 
-      return `Il y a ${months} mois`;
+      return `il y a ${months} mois`;
     }
 
-    const activeStep = document.querySelector("li.itemFrise.active");
-    if (!activeStep) throw new Error("Étape active non trouvée");
+    // Attendre l'élément actif au lieu de lancer une erreur s'il n'est pas trouvé
+    const activeStep = await waitForActiveStep();
 
     // Trouver la classe CSS dynamique
     const dynamicClass = activeStep
@@ -252,8 +271,13 @@
     `;
 
     activeStep.parentNode.insertBefore(newElement, activeStep.nextSibling);
-    console.log("Nouvel élément inséré avec le statut du dossier");
+    console.log(
+      "Extension API Naturalisation  : Nouvel élément inséré avec le statut du dossier"
+    );
   } catch (error) {
-    console.error("Erreur d'initialisation:", error);
+    console.log(
+      "Extension API Naturalisation : Erreur d'initialisation:",
+      error
+    );
   }
 })();
