@@ -119,6 +119,8 @@
         prop_decision_pref_a_effectuer: "Préfecture : Décision à effectuer",
         prop_decision_pref_en_attente_retour_hierarchique:
           "Préfecture : Décision en discussion hiérarchique",
+        prop_decision_pref_en_attente_retour_hierarchiqu:
+            "Préfecture : Décision en discussion hiérarchique",
         prop_decision_pref_prop_a_editer:
           "Préfecture : Décision prise, rédaction en cours",
         prop_decision_pref_en_attente_retour_signataire:
@@ -174,7 +176,7 @@
         const secondaryData = await secondaryResponse.json();
         return (
           statusMap[secondaryData?.dossier_state] ||
-          statusMap["code_non_reconnu"]
+          secondaryData?.dossier_state || statusMap["code_non_reconnu"]
         );
       }
     }
