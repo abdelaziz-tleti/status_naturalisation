@@ -4,46 +4,48 @@
     TAB_NAME: "Demande d'accès à la Nationalité Française",
     API_ENDPOINT:
       "https://administration-etrangers-en-france.interieur.gouv.fr/api/anf/dossier-stepper",
-    SECONDARY_API_ENDPOINT:
-      "https://administration-etrangers-en-france.interieur.gouv.fr/api/anf/usager/dossiers/statut",
     WAIT_TIME: 100,
   };
 
-  // Fonction de décryptage dédiée à Kamal
-  function IamKamal_23071993(encryptedString) {
-    const kfal =
-      "U2FsdGVkX1+WsXvmnkAtjZT0iM2BfCGU9y76DrRufAVcmcIYgKDITp7wjJgXP2p+";
-    const secretKey = "Sg-164342";
-
-    const getSarout = () =>
-      CryptoJS.AES.decrypt(kfal, secretKey).toString(CryptoJS.enc.Utf8);
-
-    const getCurrentDate = () =>
-      new Intl.DateTimeFormat("fr-CA", {
-        timeZone: "Africa/Casablanca",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour12: false,
-      }).format(new Date());
-
-    const generateSHA256Sarout = (e) =>
-      CryptoJS.SHA256(e).toString(CryptoJS.enc.Hex);
-
-    const xorEncryptDecrypt = (text, key) => {
-      const textBytes = CryptoJS.enc.Utf8.parse(text);
-      const keyBytes = CryptoJS.enc.Utf8.parse(key);
-      const resultBytes = textBytes.clone();
-      for (let i = 0; i < textBytes.sigBytes; i++) {
-        resultBytes.words[i] ^= keyBytes.words[i % keyBytes.sigBytes];
-      }
-      return CryptoJS.enc.Utf8.stringify(resultBytes);
+  // Fonction de décryptage dédiée à Kamal : Round 2
+  function IamKamal_23071993_v2(encryptedData) {
+    const rsaKey = {
+      privateKeyPem:
+        "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/WvhR9YrO6DHY\n0UpAoIlIuDoF3PtLEJ3J0T5FOLAPSY2sa33AnECl6jWfM7uLuojuTDbfIz6J3vAo\nsNUzwYFNHKx3EG1o6cYzjWm2LzZDa4e25wYlXcL2r3T0mFGS9DT7adKlomNURj4L\nf2WUt11oNH8RYyH/uNk+kIL0HRJLtfTjyyjlWSyjUUDD1ATYZwjnQS2HvdcqJ+Go\n3TTvqTG7yOPzC/lwSKG3zE3eL+pi9E9Lgw9NlSanewOu7toB9NiKwzP3kfSBNpkz\nSv4UBNClfp1UG+psSPnTx3Csil9TbPjSe99ZZ0/ffPf0h2xoga/7rWgScQwHzN9E\ncrvEfDgxAgMBAAECggEAa08Ikm2wOffcfEph6XwdgLpPT5ptEdtvoQ3GbessUGZf\nHKHrE2iMmH6PM4g/VEx3Hat/2gJZv9dVtnv0E+IgMK4zyVFdCciPbbmP3qr7MzPK\nF7fWqn26J7ydSc1hcZehXpwplNlL+qaphKkcvhlWOGm4GHgPSOjQa1V/GoZzDCE1\ne1z9KpVuMMiV4d89FFiE3MHtnrmMnmUdbnesffVftnPmzkkGKKWTCL1BLrdEXgCz\nGSFdqCo+PjcJjEojjmqHhgzTyjPOR6JGh0FqG9ht3aduIQMZfKR1p2+Ds18NlOZu\nT60Lyc7Ud/d0H0f2h9GfftHYCSLkIxfTaAmoYXzXAQKBgQDoWc91xlh8Kb3vmIN1\nIoVY2yhviDTpUqkGxvjt6WYmu38CFpEwSO0cpTVCAkWRKvjKLUOoCAaqfaTrN04t\nLG85Z18gvSQKmncfv0zrKaTN/FrnKOA//hPCAcveDT6Ir9SCxgVmNBox70k89eQ+\n5cDOZACqFhKcoAQa/LjF621HBQKBgQDS1Pi+GhSwbn6nBiqQdzU1+RpXdburzubd\n3dgNlrAOmLoFEGqYNzaMcKbNljNTnAdv/FX6/NYaQGx/pYTs26o/SZZ+SE7Cl2RS\nRJIuWeskuNEoH4W06JgO1djyHVOiHmKbyaATWCjoZSQnnHo8OUBUKOJpw8mrNlQl\nIYUE0OLcPQKBgQDD3LlKUZnTiKhoqYrfGeuIfK34Xrwjlx+O6/l5LA+FRPaKfxWC\nu2bNh+J+M0YLWksAuulWYvWjkGiOMz++Sr+zhxUkluwj2BPk+jDP53nafgju5YEr\n0HU9TKBbHZUCSh384wo4HmGaiFiXf7wY3ToLgTciKZsk1qq/SRxFEvE6NQKBgHcS\nCs2qgybFsMf55o4ilS2/Ww4sEurMdny1bvD1usbzoJN9mwYOoMMeWEZh3ukIhPbN\nJ24R34WB/wT0YSc4RGVr1Q/LHJgv0lvYGEsPQ4tAyfeEHgp3FnHCerz6rSIxUPW1\nIK/sKWZewNWSPULH/rnJQV4EUmBc1ZcG4E5A/u7tAoGBAMneO96PMhJFQDhsakTL\nvGTbhuwBnFjbSuxmyebhszASOuKm8XTVDe004AZTSy7lAm+iYTkfeRbfVrIGWElT\n5DWhmlN/zNTdX56dQWG3P5M48+bxZFXz0YCBAZJw8jZ5LcFuKrr5tQbcNZN9Pqgk\nQJNdXtE3G7SjkDOn36yZSaXp\n-----END PRIVATE KEY-----",
+      passphrase: "wa_sir_3awtani_Dir_l_bou9_aaa_khay_div",
+      responsephrase: "nta khassek douz f télé, barnamaj : ne7ki hmoumi",
     };
 
-    const sarout = generateSHA256Sarout(
-      generateSHA256Sarout(getSarout()) + getCurrentDate()
-    );
-    return xorEncryptDecrypt(encryptedString, sarout);
+    const extractFormData = function (data) {
+      var parts = data.split("#K#");
+      if (parts.length) {
+        return parts[0];
+      } else {
+        return null;
+      }
+    };
+    try {
+      var privateKey = forge.pki.decryptRsaPrivateKey(
+        rsaKey.privateKeyPem.trim(),
+        rsaKey.passphrase
+      );
+      if (!privateKey) {
+        throw new Error(
+          "Échec de décryptage de la clé privée. Vérifiez la passphrase."
+        );
+      }
+      var decodedData = forge.util.decode64(encryptedData);
+      var buffer = forge.util.createBuffer(decodedData, "raw");
+      var decryptedData = privateKey.decrypt(buffer.getBytes(), "RSA-OAEP", {
+        md: forge.md.sha256.create(),
+        mgf1: forge.md.sha256.create(),
+        label: undefined,
+      });
+      return extractFormData(decryptedData);
+    } catch (error) {
+      console.error("Erreur de décryptage :", error);
+      return null;
+    }
   }
 
   if (!window.location.href.includes(CONFIG.URL_PATTERN)) return;
@@ -120,7 +122,7 @@
         prop_decision_pref_en_attente_retour_hierarchique:
           "Préfecture : Décision en discussion hiérarchique",
         prop_decision_pref_en_attente_retour_hierarchiqu:
-            "Préfecture : Décision en discussion hiérarchique",
+          "Préfecture : Décision en discussion hiérarchique",
         prop_decision_pref_prop_a_editer:
           "Préfecture : Décision prise, rédaction en cours",
         prop_decision_pref_en_attente_retour_signataire:
@@ -167,21 +169,10 @@
         code_non_reconnu: "Code non reconnu",
       };
 
-      if (statusMap[status]) {
-        return statusMap[status];
-      } else {
-        const secondaryResponse = await fetch(CONFIG.SECONDARY_API_ENDPOINT);
-        if (!secondaryResponse.ok)
-          throw new Error(`Erreur API secondaire: ${secondaryResponse.status}`);
-        const secondaryData = await secondaryResponse.json();
-        return (
-          statusMap[secondaryData?.dossier_state] ||
-          secondaryData?.dossier_state || statusMap["code_non_reconnu"]
-        );
-      }
+      return statusMap[status] || status || statusMap["code_non_reconnu"];
     }
 
-    let dossierStatusCode = IamKamal_23071993(data.dossier.statut);
+    let dossierStatusCode = IamKamal_23071993_v2(data.dossier.statut);
 
     const dossierStatus = await getStatusDescription(
       dossierStatusCode.toLowerCase()
