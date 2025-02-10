@@ -104,7 +104,7 @@
         instruction_a_affecter: "Préfecture : En attente affecation à un agent",
         // 3 Réception du récépissé de complétude
         instruction_recepisse_completude_a_envoyer:
-          "Préfecture : récépissé de compléture à envoyer",
+          "Préfecture : récépissé de complétude à envoyer",
         instruction_recepisse_completude_a_envoyer_retour_complement_a_traiter:
           "Préfecture : Compléments à traiter par l'agent",
         // 4 Entretien
