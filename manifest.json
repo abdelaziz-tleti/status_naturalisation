@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Statut API du Dossier Naturalisation",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Statut API du Dossier Naturalisation",
   "permissions": [
     "scripting",
@@ -16,7 +16,7 @@
     "run_at": "document_end"
   }],
   "web_accessible_resources": [{
-    "resources": ["content.js", "crypto-js.min.js"],
+    "resources": ["content.js", "crypto-js.min.js", "forge.min.js"],
     "matches": ["https://administration-etrangers-en-france.interieur.gouv.fr/*"]
   }],
   "icons": {
