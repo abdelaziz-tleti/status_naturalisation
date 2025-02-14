@@ -19,4 +19,4 @@
 
 Et voilà, l'extension est installé et utilisable sur ton Chrome 🎉
 
-<img width="1279" alt="image" src="https://github.com/user-attachments/assets/63577ee2-9ec0-40ea-910c-18b0eb761f4e" />
+![image](https://github.com/user-attachments/assets/bd22b6f1-8ab5-4dfd-a13f-8aacc1672b99)
