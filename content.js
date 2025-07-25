@@ -98,15 +98,16 @@
         dossier_depose: "Dossier déposé, attendez changement d'API",
         // 2 Examen des pièces en cours
         verification_formelle_a_traiter:
-          "Préfecture : Vérification à planfiier",
+          "Préfecture : Vérification à planifier",
         verification_formelle_en_cours: "Préfecture examine votre demande",
         verification_formelle_mise_en_demeure:
           "Préfecture : Possible demande de compléments pour dossier",
         css_mise_en_demeure_a_affecter:
           "Préfecture : Mise en demeure attribuée",
-        css_manuels_a_affecter: "Classment sans suite manuels à affecter",
+        css_manuels_a_affecter: "Classement sans suite manuels à affecter",
         css_mise_en_demeure_a_rediger: "Préfecture : Mise en demeure à rédiger",
-        instruction_a_affecter: "Préfecture : En attente affecation à un agent",
+        instruction_a_affecter:
+          "Préfecture : En attente affectation à un agent",
         // 3 Réception du récépissé de complétude
         instruction_recepisse_completude_a_envoyer:
           "Préfecture : récépissé de complétude à envoyer",
@@ -162,14 +163,14 @@
         decret_a_qualifier: "Décision : Décret à qualifier",
         decret_en_validation: "Décision : Décret en validation",
         css_en_delais_recours:
-          "Décision : Classment sans suite en délais de recours",
+          "Décision : Classement sans suite en délais de recours",
         decision_negative_en_delais_recours:
           "Décision négative en délais de recours",
         irrecevabilite_manifeste: "Décision : irrecevabilité manifeste",
         irrecevabilite_manifeste_en_delais_recours:
           "Décision : irrecevabilité en délais de recours",
         decision_notifiee: "Décision notifiée",
-        css_notifie: "Décision : Classment sans suite notitie",
+        css_notifie: "Décision : Classement sans suite notifiée",
         demande_en_cours_rapo: "Décision : Demande en cours RAPO",
         controle_demande_notifiee: "Décision : Contrôle demande notifiée",
         decret_publie: "Décret de naturalisation publié",
