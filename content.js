@@ -161,14 +161,15 @@
         decret_en_preparation: "Décision : Décret en préparation",
         decret_a_qualifier: "Décision : Décret à qualifier",
         decret_en_validation: "Décision : Décret en validation",
-        css_en_delais_recours: "Décision : CSS en délais de recours",
+        css_en_delais_recours:
+          "Décision : Classment sans suite en délais de recours",
         decision_negative_en_delais_recours:
           "Décision négative en délais de recours",
         irrecevabilite_manifeste: "Décision : irrecevabilité manifeste",
         irrecevabilite_manifeste_en_delais_recours:
           "Décision : irrecevabilité en délais de recours",
         decision_notifiee: "Décision notifiée",
-        css_notifie: "Décision : CSS notitie",
+        css_notifie: "Décision : Classment sans suite notitie",
         demande_en_cours_rapo: "Décision : Demande en cours RAPO",
         controle_demande_notifiee: "Décision : Contrôle demande notifiée",
         decret_publie: "Décret de naturalisation publié",
