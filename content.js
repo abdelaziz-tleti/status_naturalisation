@@ -104,6 +104,7 @@
           "Préfecture : Possible demande de compléments pour dossier",
         css_mise_en_demeure_a_affecter:
           "Préfecture : Mise en demeure attribuée",
+        css_manuels_a_affecter: "Classment sans suite manuels à affecter",
         css_mise_en_demeure_a_rediger: "Préfecture : Mise en demeure à rédiger",
         instruction_a_affecter: "Préfecture : En attente affecation à un agent",
         // 3 Réception du récépissé de complétude
