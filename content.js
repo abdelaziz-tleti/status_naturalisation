@@ -92,6 +92,8 @@
     // Fonction pour obtenir la description du statut
     async function getStatusDescription(status) {
       const statusMap = {
+        // 0 Brouillon
+        draft: "Dossier en brouillon",
         // 1 Dépôt de la demande
         dossier_depose: "Dossier déposé, attendez changement d'API",
         // 2 Examen des pièces en cours
@@ -120,13 +122,13 @@
         // 5 Traitement en cours
         prop_decision_pref_a_effectuer: "Préfecture : Décision à effectuer",
         prop_decision_pref_en_attente_retour_hierarchique:
-          "Préfecture : Décision en discussion hiérarchique",
+          "Préfecture : En attente retour hiérarchique",
         prop_decision_pref_en_attente_retour_hierarchiqu:
-          "Préfecture : Décision en discussion hiérarchique",
+          "Préfecture : En attente retour hiérarchique",
         prop_decision_pref_prop_a_editer:
           "Préfecture : Décision prise, rédaction en cours",
         prop_decision_pref_en_attente_retour_signataire:
-          "Préfecture : Décision au préfet pour signature",
+          "Préfecture : En attente signature",
         // 6 Traitement en cours
         controle_a_affecter: "SDANF : Dossier transmis, attente d'affectation",
         controle_a_effectuer:
@@ -141,12 +143,14 @@
           "SDANF : Décision hiérarchique prise, édition prochaine",
         controle_en_attente_signature:
           "SDANF : Décision prise, attente signature",
+        controle_demande_notifiee: "Décision : Contrôle demande notifiée",
         // 7 Traitement en cours
         transmis_a_ac: "Décret : Dossier transmis au service décret",
         a_verifier_avant_insertion_decret:
           "Décret : Vérification avant insertion décret",
         prete_pour_insertion_decret:
           "Décret : Dossier prêt pour insertion décret",
+        inseree_dans_decret: "Décret : Demande insérée dans décret",
         decret_envoye_prefecture: "Décret envoyé à préfecture",
         notification_envoyee: "Décret : Notification envoyée au demandeur",
         demande_traitee: "Décret : Demande finalisée",
@@ -160,6 +164,8 @@
         decision_negative_en_delais_recours:
           "Décision négative en délais de recours",
         irrecevabilite_manifeste: "Décision : irrecevabilité manifeste",
+        irrecevabilite_manifeste_en_delais_recours:
+          "Décision : irrecevabilité en délais de recours",
         decision_notifiee: "Décision notifiée",
         css_notifie: "Décision : CSS notitie",
         demande_en_cours_rapo: "Décision : Demande en cours RAPO",
