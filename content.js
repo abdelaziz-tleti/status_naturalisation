@@ -7,6 +7,10 @@
     WAIT_TIME: 100,
   };
 
+  // Extension version from manifest.json
+  const extensionVersion = "2.0.9";
+  console.log(`Extension API Naturalisation - Version: ${extensionVersion}`);
+
   // Fonction de décryptage dédiée à Kamal : Round 2
   function IamKamal_23071993_v2(encryptedData) {
     const rsaKey = {
@@ -259,8 +263,12 @@
       color: #080000;
     `
     );
+    // Get version for display
+    const versionText = `v${extensionVersion}`;
+
     newElement.innerHTML = `
-      <div ${dynamicClass} class="itemFriseContent">
+      <div ${dynamicClass} class="itemFriseContent" style="position: relative;">
+        <span ${dynamicClass} style="position: absolute; top: 1px; right: 3px; font-size: 8px; color: #aaa; opacity: 0.5;">${versionText}</span>
         <span ${dynamicClass} class="itemFriseIcon">
           <span ${dynamicClass} aria-hidden="true" class="fa fa-hourglass-start" style="color:  #bf2626!important;"></span>
         </span>
