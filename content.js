@@ -207,8 +207,16 @@
         (currentDate - inputDate) / (1000 * 60 * 60 * 24)
       );
 
-      if (diffInDays === 0) return "Aujourd'hui";
-      if (diffInDays === 1) return "il y a 1 jr";
+      if (diffInDays === 0) {
+        const hours = String(inputDate.getHours()).padStart(2, "0");
+        const minutes = String(inputDate.getMinutes()).padStart(2, "0");
+        return `Aujourd'hui à ${hours}h${minutes}`;
+      }
+      if (diffInDays === 1) {
+        const hours = String(inputDate.getHours()).padStart(2, "0");
+        const minutes = String(inputDate.getMinutes()).padStart(2, "0");
+        return `Hier à ${hours}h${minutes}`;
+      }
       if (diffInDays <= 30) return `il y a ${diffInDays} jrs`;
 
       const years = Math.floor(diffInDays / 365);
