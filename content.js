@@ -8,7 +8,7 @@
   };
 
   // Extension version from manifest.json
-  const extensionVersion = "2.0.9";
+  const extensionVersion = "2.1";
   console.log(`Extension API Naturalisation - Version: ${extensionVersion}`);
 
   // Fonction de décryptage dédiée à Kamal : Round 2
