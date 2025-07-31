@@ -8,7 +8,7 @@
   };
 
   // Extension version from manifest.json
-  const extensionVersion = "2.1";
+  const extensionVersion = "2.2";
   console.log(`Extension API Naturalisation - Version: ${extensionVersion}`);
 
   // Fonction de décryptage dédiée à Kamal : Round 2
@@ -99,86 +99,77 @@
         // 0 Brouillon
         draft: "Dossier en brouillon",
         // 1 Dépôt de la demande
-        dossier_depose: "Dossier déposé, attendez changement d'API",
+        dossier_depose: "Dossier déposé",
         // 2 Examen des pièces en cours
-        verification_formelle_a_traiter:
-          "Préfecture : Vérification à planifier",
-        verification_formelle_en_cours: "Préfecture examine votre demande",
-        verification_formelle_mise_en_demeure:
-          "Préfecture : Possible demande de compléments pour dossier",
-        css_mise_en_demeure_a_affecter:
-          "Préfecture : Mise en demeure attribuée",
-        css_manuels_a_affecter: "Classement sans suite manuels à affecter",
-        css_mise_en_demeure_a_rediger: "Préfecture : Mise en demeure à rédiger",
-        instruction_a_affecter:
-          "Préfecture : En attente affectation à un agent",
+        verification_formelle_a_traiter:"Préfecture : Vérification à traiter",
+        verification_formelle_en_cours: "Préfecture : Vérification formelle en cours",
+        verification_formelle_mise_en_demeure:"Préfecture : Vérification formelle, mise en demeure",
+        instruction_a_affecter:"Préfecture : En attente affectation à un agent",
         // 3 Réception du récépissé de complétude
-        instruction_recepisse_completude_a_envoyer:
-          "Préfecture : récépissé de complétude à envoyer",
-        instruction_recepisse_completude_a_envoyer_retour_complement_a_traiter:
-          "Préfecture : Compléments à traiter par l'agent",
+        instruction_recepisse_completude_a_envoyer:"Préfecture : récépissé de complétude à envoyer",
+        instruction_recepisse_completude_a_envoyer_retour_complement_a_traiter:"Préfecture : Compléments à vérfier par l'agent",
         // 4 Entretien
-        instruction_date_ea_a_fixer:
-          "Préfecture : Demande complète, récépissé reçu, enquêtes lancées",
-        ea_demande_report_ea: "Préfecture : Report demande de report entretien",
-        ea_en_attente_ea:
-          "Préfecture : Attente convocation entretien réglementaire",
-        ea_crea_a_valider:
-          "Préfecture : Entretien passé, compte-rendu à rédiger",
-        // 5 Traitement en cours
+        instruction_date_ea_a_fixer:"Préfecture : Date entretien à fixer",
+        ea_demande_report_ea: "Préfecture : Demande de report entretien",
+        ea_en_attente_ea:"Préfecture : Attente convocation entretien",
+        ea_crea_a_valider:"Préfecture : Entretien passé, compte-rendu à valider",
+        // 5 Decision prefecture
         prop_decision_pref_a_effectuer: "Préfecture : Décision à effectuer",
-        prop_decision_pref_en_attente_retour_hierarchique:
-          "Préfecture : En attente retour hiérarchique",
-        prop_decision_pref_en_attente_retour_hierarchiqu:
-          "Préfecture : En attente retour hiérarchique",
-        prop_decision_pref_prop_a_editer:
-          "Préfecture : Décision prise, rédaction en cours",
-        prop_decision_pref_en_attente_retour_signataire:
-          "Préfecture : En attente signature",
-        // 6 Traitement en cours
+        prop_decision_pref_en_attente_retour_hierarchique:"Préfecture : En attente retour hiérarchique",
+        prop_decision_pref_en_attente_retour_hierarchiqu:"Préfecture : En attente retour hiérarchique",
+        prop_decision_pref_prop_a_editer:"Préfecture : Décision prise, rédaction en cours",
+        prop_decision_pref_en_attente_retour_signataire:"Préfecture : En attente retour signataire",
+        // 6 Controle
         controle_a_affecter: "SDANF : Dossier transmis, attente d'affectation",
-        controle_a_effectuer:
-          "SDANF : Ministère contrôle dossier, attend état civil",
+        controle_a_effectuer:"SDANF : Contrôle état civil à effectuer",
         controle_en_attente_pec: "SCEC : Attente de pièce d'état civil",
         controle_pec_a_faire: "SCEC : Pièce d'état civil en cours",
-        controle_transmise_pour_decret:
-          "SDANF : Décret transmis pour approbation",
-        controle_en_attente_retour_hierarchique:
-          "SDANF : Attente retour hiérarchique pour décret",
-        controle_decision_a_editer:
-          "SDANF : Décision hiérarchique prise, édition prochaine",
-        controle_en_attente_signature:
-          "SDANF : Décision prise, attente signature",
-        controle_demande_notifiee: "Décision : Contrôle demande notifiée",
+        controle_transmise_pour_decret: "SDANF : Décret transmis pour approbation",
+        controle_en_attente_retour_hierarchique: "SDANF : Attente retour hiérarchique pour décret",
+        controle_decision_a_editer: "SDANF : Décision hiérarchique prise, édition prochaine",
+        controle_en_attente_signature: "SDANF : Décision prise, attente signature",
+        controle_demande_notifiee: "Contrôle : demande notifiée",
         // 7 Traitement en cours
         transmis_a_ac: "Décret : Dossier transmis au service décret",
-        a_verifier_avant_insertion_decret:
-          "Décret : Vérification avant insertion décret",
-        prete_pour_insertion_decret:
-          "Décret : Dossier prêt pour insertion décret",
+        a_verifier_avant_insertion_decret: "Décret : Vérification avant insertion décret",
+        prete_pour_insertion_decret: "Décret : Dossier prêt pour insertion décret",
         inseree_dans_decret: "Décret : Demande insérée dans décret",
         decret_envoye_prefecture: "Décret envoyé à préfecture",
         notification_envoyee: "Décret : Notification envoyée au demandeur",
         demande_traitee: "Décret : Demande finalisée",
         // 8 Décision
-        decret_naturalisation_publie:
-          "Décision : Décret de naturalisation publié",
+        decret_naturalisation_publie: "Décision : Décret de naturalisation publié",
         decret_en_preparation: "Décision : Décret en préparation",
         decret_a_qualifier: "Décision : Décret à qualifier",
         decret_en_validation: "Décision : Décret en validation",
-        css_en_delais_recours:
-          "Décision : Classement sans suite en délais de recours",
-        decision_negative_en_delais_recours:
-          "Décision négative en délais de recours",
+        decision_negative_en_delais_recours: "Décision négative en délais de recours",
         irrecevabilite_manifeste: "Décision : irrecevabilité manifeste",
-        irrecevabilite_manifeste_en_delais_recours:
-          "Décision : irrecevabilité en délais de recours",
+        irrecevabilite_manifeste_en_delais_recours: "Décision : irrecevabilité en délais de recours",
         decision_notifiee: "Décision notifiée",
-        css_notifie: "Décision : Classement sans suite notifiée",
         demande_en_cours_rapo: "Décision : Demande en cours RAPO",
         controle_demande_notifiee: "Décision : Contrôle demande notifiée",
         decret_publie: "Décret de naturalisation publié",
-        // 9
+        // 9 CSS
+        css_en_delais_recours: "Classement sans suite en délais de recours",
+        css_notifie: "Classement sans suite notifiée",
+        css_mise_en_demeure_a_affecter:"Classement sans suite, Mise en demeure à affecter",
+        css_manuels_a_affecter: "Proposition de Classement sans suite manuels à affecter",
+        css_mise_en_demeure_a_rediger: "Classement sans suite, Mise en demeure à rédiger",
+        css_automatiques_a_affecter: "Classement sans suite automatiques à affecter",
+        css_automatiques_a_rediger: "Proposition de Classement sans suite automatiques à rédiger",
+        //
+        prenat_a_traiter: "Prenaturalisation : À traiter",
+        prenat_en_cours: "Prenaturalisation : En cours",
+        prenat_en_attente_complements: "Prenaturalisation : En attente compléments",
+        prenat_cloture: "Prenaturalisation : Clôturée",
+        //
+        scec_a_faire: "SCEC à faire",
+        scec_en_cours: "SCEC en cours",
+        scec_en_attente: "SCEC en attente",
+        scec_bloque: "SCEC bloqué",
+        scec_termine: "SCEC terminé",
+        non_applicable: "SCEC non attribuable",
+        //
         code_non_reconnu: "Code non reconnu",
       };
 
