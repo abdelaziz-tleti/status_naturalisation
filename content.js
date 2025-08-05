@@ -276,6 +276,9 @@
       data?.dossier?.date_statut
     )})</span>
         </p>
+        <p ${dynamicClass} style="font-size: 10px; color: #666; margin-top: 5px; background-color: #f5f5f5; padding: 3px 6px; border-radius: 3px;">
+          Statut: ${dossierStatusCode} | Date: ${data?.dossier?.date_statut ? new Date(data.dossier.date_statut).toLocaleString('fr-FR') : 'N/A'}
+        </p>
       </div>
     `;
 
