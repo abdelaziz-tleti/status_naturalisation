@@ -25,3 +25,4 @@ Et voilà, l'extension est installé et utilisable sur ton Chrome 🎉
 ![Image](https://github.com/user-attachments/assets/45d7d32b-2de8-44c8-baea-fdccaf6c610e)
 
 
+(merci https://github.com/divisi0n/status_naturalisation )
