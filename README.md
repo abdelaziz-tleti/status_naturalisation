@@ -22,4 +22,6 @@ Vidéo tutorielle sur YouTube (je ne suis pas le propriétaire de la chaîne) : 
 
 Et voilà, l'extension est installé et utilisable sur ton Chrome 🎉
 
-![image](https://github.com/user-attachments/assets/bd22b6f1-8ab5-4dfd-a13f-8aacc1672b99)
+![image]([https://github.com/user-attachments/assets/bd22b6f1-8ab5-4dfd-a13f-8aacc1672b99](https://github.com/user-attachments/assets/2660fdcb-ae28-4027-a4fe-7ff5b4bc9507))
+
+
