@@ -276,8 +276,10 @@
       data?.dossier?.date_statut
     )})</span>
         </p>
-        <p ${dynamicClass} style="font-size: 10px; color: #666; margin-top: 5px; background-color: #fff3cd; padding: 3px 6px; border-radius: 3px;">
-          Statut: ${dossierStatusCode} | Date: ${data?.dossier?.date_statut ? new Date(data.dossier.date_statut).toLocaleString('fr-FR') : 'N/A'}
+        <p ${dynamicClass} style="font-size: 12px; color: #666; margin-top: 5px; background-color: #fff3cd; padding: 5px 8px; border-radius: 3px; line-height: 1.4;">
+          Statut: ${dossierStatusCode}<br>
+          Dernière mise à jour: ${data?.dossier?.date_statut ? new Date(data.dossier.date_statut).toLocaleString('fr-FR', {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}) : 'N/A'}<br>
+          Année dépôt: ${data?.dossier?.numero_national ? data.dossier.numero_national.split('X')[0] : 'N/A'}
         </p>
       </div>
     `;
