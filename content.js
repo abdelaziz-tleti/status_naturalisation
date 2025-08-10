@@ -208,7 +208,7 @@
         const minutes = String(inputDate.getMinutes()).padStart(2, "0");
         return `Hier à ${hours}h${minutes}`;
       }
-      if (diffInDays <= 30) return `il y a ${diffInDays} jrs`;
+      if (diffInDays <= 30) return `il y a ${diffInDays}J`;
 
       const years = Math.floor(diffInDays / 365);
       const months = Math.floor((diffInDays % 365) / 30);
@@ -220,19 +220,17 @@
         }
         return `il y a ${years} ${
           years === 1 ? "an" : "ans"
-        } et ${months} mois`;
+        } et ${months}M`;
       }
 
       if (months >= 1) {
         if (days === 0) {
-          return `il y a ${months} ${months === 1 ? "mois" : "mois"}`;
+          return `il y a ${months}M`;
         }
-        return `il y a ${months} ${
-          months === 1 ? "mois" : "mois"
-        } et ${days} jrs`;
+        return `il y a ${months}M et ${days}J`;
       }
 
-      return `il y a ${months} mois`;
+      return `il y a ${months}M`;
     }
 
     // Attendre l'élément actif au lieu de lancer une erreur s'il n'est pas trouvé
@@ -243,13 +241,8 @@
       .getAttributeNames()
       .find((name) => name.startsWith("_ngcontent-"));
 
-    // Création du nouvel élément avec le style et le format spécifiés
-    const newElement = document.createElement("li");
-    newElement.setAttribute(dynamicClass, "");
-    newElement.className = "itemFrise active ng-star-inserted";
-    newElement.setAttribute(
-      "style",
-      `
+    // Styles CSS organisés et nettoyés
+    const containerStyles = `
       background: linear-gradient(165deg, #dbe2e9, #ffffff);
       border: 2px solid #255a99;
       border-radius: 8px;
@@ -260,26 +253,74 @@
       font-family: Arial, sans-serif;
       font-size: 18px;
       color: #080000;
-    `
-    );
-    // Get version for display
+      padding: 15px;
+      margin: 10px 0;
+    `.trim();
+
+    const versionStyles = `
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 8px;
+      color: #aaa;
+      opacity: 0.5;
+    `.trim();
+
+    const mainStatusStyles = `
+      margin: 0 0 15px 0;
+      line-height: 1.5;
+      font-size: 16px;
+    `.trim();
+
+    const statusInfoStyles = `
+      font-size: 12px;
+      color: #666;
+      margin: 15px 0 0 0;
+      background-color: #fff3cd;
+      padding: 10px 12px;
+      border-radius: 5px;
+      line-height: 1.6;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    `.trim();
+
+    // Données formatées
     const versionText = `v${extensionVersion}`;
+    const lastUpdateDate = data?.dossier?.date_statut 
+      ? new Date(data.dossier.date_statut).toLocaleString('fr-FR', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit'
+        })
+      : 'N/A';
+    
+    const depositYear = data?.dossier?.numero_national 
+      ? data.dossier.numero_national.split('X')[0]
+      : 'N/A';
+
+    // Création du nouvel élément avec le style et le format spécifiés
+    const newElement = document.createElement("li");
+    newElement.setAttribute(dynamicClass, "");
+    newElement.className = "itemFrise active ng-star-inserted";
+    newElement.setAttribute("style", containerStyles);
 
     newElement.innerHTML = `
       <div ${dynamicClass} class="itemFriseContent" style="position: relative;">
-        <span ${dynamicClass} style="position: absolute; top: 1px; right: 3px; font-size: 8px; color: #aaa; opacity: 0.5;">${versionText}</span>
+        <span ${dynamicClass} style="${versionStyles}">${versionText}</span>
         <span ${dynamicClass} class="itemFriseIcon">
-          <span ${dynamicClass} aria-hidden="true" class="fa fa-hourglass-start" style="color:  #bf2626!important;"></span>
+          <span ${dynamicClass} aria-hidden="true" class="fa fa-hourglass-start" style="color: #bf2626 !important;"></span>
         </span>
-        <p ${dynamicClass}>
-          ${dossierStatus} <span style="color: #bf2626;">(${daysAgo(
-      data?.dossier?.date_statut
-    )})</span>
+        <p ${dynamicClass} style="${mainStatusStyles}">
+          ${dossierStatusCode === 'CONTROLE_A_AFFECTER' 
+            ? 'SDANF : Dossier transmis, <span style="color: #dc3545;">attente d\'affectation</span>'
+            : dossierStatus
+          } <span style="color: #bf2626;">(${daysAgo(data?.dossier?.date_statut)})</span>
         </p>
-        <p ${dynamicClass} style="font-size: 12px; color: #666; margin-top: 5px; background-color: #fff3cd; padding: 5px 8px; border-radius: 3px; line-height: 1.4;">
-          Statut: ${dossierStatusCode}<br>
-          Dernière mise à jour: ${data?.dossier?.date_statut ? new Date(data.dossier.date_statut).toLocaleString('fr-FR', {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}) : 'N/A'}<br>
-          Année dépôt: ${data?.dossier?.numero_national ? data.dossier.numero_national.split('X')[0] : 'N/A'}
+        <p ${dynamicClass} style="${statusInfoStyles}">
+          <span style="color: #2c5aa0; font-weight: 600;">Statut:</span> <span style="color: #dc3545; font-weight: 500;">${dossierStatusCode}</span><br>
+          <span style="color: #2c5aa0; font-weight: 600;">Dernière mise à jour:</span> <span style="color: #dc3545; font-weight: 500;">${lastUpdateDate}</span><br>
+          <span style="color: #2c5aa0; font-weight: 600;">Année dépôt:</span> <span style="color: #dc3545; font-weight: 500;">${depositYear}</span>
         </p>
       </div>
     `;
